@@ -1,0 +1,44 @@
+# Node.js dependencies
+/node_modules
+
+# Next.js build output
+/.next
+/out
+
+# Production build
+/build
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Local environment variables
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# TypeScript build cache
+*.tsbuildinfo
+
+# IDE/editor configs
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
+!.vscode/launch.json
+.idea/
+*.swp
+
+# Summaries (generated files)
+summary/
+summary_final/
+
+# Optional: PDFs generated at runtime
+*.pdf

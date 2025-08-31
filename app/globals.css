@@ -1,0 +1,56 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Global Styles */
+html, body {
+  @apply h-full w-full m-0 p-0;
+  font-family: 'Inter', sans-serif;
+  background: theme('colors.slate.50');
+  color: theme('colors.gray.900');
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: theme('colors.slate.200');
+}
+::-webkit-scrollbar-thumb {
+  background: theme('colors.slate.500');
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: theme('colors.slate.600');
+}
+
+/* Sidebar Links */
+.sidebar-link {
+  @apply block px-3 py-2 rounded-md transition-colors;
+}
+.sidebar-link:hover {
+  @apply bg-slate-700 text-white;
+}
+
+/* Summary Box */
+.summary-box {
+  @apply bg-slate-50 p-4 rounded-xl border border-slate-200 overflow-y-auto;
+}
+
+/* Chat Styles */
+.chat-user {
+  @apply font-medium text-slate-800;
+}
+.chat-bot {
+  @apply text-slate-600;
+}
+
+/* Upload Drop Zone */
+.upload-zone {
+  @apply flex flex-col items-center justify-center w-full p-6 border-2 border-dashed rounded-xl cursor-pointer transition-colors;
+}
+.upload-zone:hover {
+  @apply bg-slate-100;
+}
