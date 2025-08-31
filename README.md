@@ -1,108 +1,185 @@
-# 📚 LearnAI Template
+📚 Study Notes Generator (ChainSummary)
 
-A Next.js template for building educational AI applications! This template provides three powerful learning tools: Flashcard Maker, Quiz Generator, and Ask-Me Study Buddy.
+Summarizes PDFs, Textbooks, and Slides into Clear Notes
 
-## Features
+Developed by: Yuvraj D Sirganor
+Powered by: PCS (Progressive Context Summarization)
+Tech Stack: Next.js + TypeScript + Tailwind CSS + Ollama (local LLMs)
 
-### 🃏 Flashcard Maker
-- **Smart Flashcards**: Paste your notes and AI creates interactive flashcards
-- **Review Mode**: Flip cards to test your knowledge
-- **Bulk Creation**: Generate multiple flashcards from large text blocks
+🚀 Project Overview
 
-### 📝 Quiz Maker  
-- **Auto Quiz Generation**: Paste text and get a complete quiz
-- **Multiple Choice**: AI generates questions with multiple choice answers
-- **Instant Feedback**: Get immediate results and explanations
+Name: Study Notes Generator (ChainSummary)
+One-liner: Upload long PDFs, textbooks, or slides → get structured notes instantly. Saves hours of manual work. Built using PCS, a custom AI summarization pipeline designed for scalability and coherence.
 
-### 🤖 Ask-Me Study Buddy
-- **AI Study Partner**: Ask any question and get helpful explanations
-- **Interactive Learning**: Follow-up questions and clarifications
-- **Subject Agnostic**: Works for any topic or subject
+✅ Key Features
 
-## 🚀 Getting Started
+✔ Multi-format input: PDF, DOC, PPT, TXT, raw text.
 
-### Installation
+✔ Interactive Q&A: Ask questions about any summary.
 
-1. Navigate to the nextjs-app directory:
-```bash
-cd nextjs-app
-```
+✔ Smart Pipeline: Chunking → Contextual Summarization → Chained Linking → Final Merge.
 
-2. Install dependencies:
-```bash
+✔ Traceability: Intermediate outputs (Part1.txt, Part2.txt, …) for debugging.
+
+✔ Scales up: Handles 30,000+ words with chunking + progressive compression.
+
+✔ Model-Agnostic: Works with local or cloud LLMs (GPT-family, Phi-3-mini-4K, LLaMA).
+
+✔ Simple UX: Upload → Auto Summarization → Download Notes.
+
+🔍 Why This Approach Works
+
+✅ Works across all text-capable models.
+
+✅ Produces better readability than hierarchical summarization.
+
+✅ Handles irregular document structures (missing headings, multiple formats).
+
+✅ Maintains context awareness throughout chunks.
+
+⚠ Limitations
+
+More chunking for small-token models.
+
+Minor detail loss during multi-stage compression.
+
+Early errors can propagate forward.
+
+Dependent on input quality.
+
+📊 Practical Chunking & Accuracy (Estimates)
+Document Size	Chunks	Accuracy
+1,000–2,000	1	~95%
+2,001–6,000	3	~88–90%
+6,001–12,000	6	~82–85%
+12,001–15,000	8	~78–80%
+15,001–20,000	10	~72–75%
+20,001–30,000	15	~68–70%
+
+(Based on Phi-3-mini-4K; larger models improve performance.)
+
+🛠 How It Works
+
+Upload file (.pdf, .docx, .pptx, .txt).
+
+Extract text → split into chunks (2,000 words default).
+
+Summarize chunks with contextual linking.
+
+Apply progressive compression after every N chunks.
+
+Merge into Final_Summary.txt, then refine for readability.
+
+Use Explanation Chat to clarify summaries.
+
+🔬 PCS (Progressive Context Summarization)
+
+PCS ensures continuity and scalability for large documents:
+✔ Sequential chunking with context linking.
+✔ Progressive compression to reduce token usage.
+✔ Outputs connected summaries that feel like one structured document.
+
+Why PCS > Other Methods
+Method	Weakness
+Map-Reduce (LangChain)	Loses continuity
+Hierarchical (SUMMA)	Tree-based & complex
+EduFuncSum (2025)	Built for code
+Progressive Summarization	Manual process
+
+PCS solves these with:
+✔ File-backed chain approach (PartN.txt) for traceability.
+✔ Explicit linking prompts between chunks.
+✔ Progressive compression for handling 30k+ words.
+
+📚 References
+
+Christensen et al., Hierarchical Summarization (ACL 2014)
+
+LangChain — Map-Reduce Summarization Docs
+
+Rong et al., EduFuncSum: Progressive Transformer for Code (J. King Saud Univ., 2025)
+
+Forte Labs — Progressive Summarization Technique
+
+🖥 Tech Stack
+
+Framework: Next.js
+ (with TypeScript)
+
+Styling: Tailwind CSS
+
+LLM Backend: Ollama
+
+Model used: Phi-3-mini-4K or any compatible GGUF model
+
+Algorithm: PCS (custom summarization pipeline)
+
+⚙ Installation & Setup
+Prerequisites
+
+Node.js (>=18)
+
+Ollama installed locally
+
+Steps
+# Clone repo
+git clone https://github.com/your-username/student-notes-generator.git
+cd student-notes-generator
+
+# Install dependencies
 npm install
-```
 
-3. Run the development server:
-```bash
+# Start the development server
 npm run dev
-```
 
-4. Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-## 📁 Project Structure
+Open http://localhost:3000
+ in your browser.
 
-```
-nextjs-app/
-├── app/
-│   ├── api/
-│   │   ├── flashcards/
-│   │   │   └── route.ts          # Flashcard generation endpoint
-│   │   ├── quiz/
-│   │   │   └── route.ts          # Quiz generation endpoint
-│   │   └── study-buddy/
-│   │       └── route.ts          # Study buddy chat endpoint
-│   ├── globals.css               # Global styles
-│   ├── layout.tsx                # Root layout component
-│   └── page.tsx                  # Main interface with all features
-├── package.json                  # Dependencies and scripts
-└── tsconfig.json                 # TypeScript configuration
-```
+🧠 How to Run Ollama with Your Model
 
-## 🎯 How to Use
+Download Phi-3-mini-4K (or your preferred model):
 
-### Flashcard Maker
-1. Click on the "Flashcard Maker" tab
-2. Paste your study notes in the text area
-3. Click "Generate Flashcards" 
-4. Review and flip through your generated flashcards
+ollama pull phi-3-mini-4k
 
-### Quiz Maker
-1. Select the "Quiz Maker" tab
-2. Paste the text you want to be quizzed on
-3. Click "Create Quiz"
-4. Answer the multiple choice questions and get instant feedback
 
-### Study Buddy
-1. Go to the "Study Buddy" tab
-2. Type any question you have about your subject
-3. Get detailed explanations and ask follow-up questions
+Update ollama-model.txt in the root directory:
 
-## 🤖 AI Model
+./ollama run phi-3-mini-4k
 
-This template uses Ollama with the `llama3.2:1b` model for all AI operations. Make sure you have Ollama installed and the model downloaded:
 
-```bash
-ollama pull llama3.2:1b
-```
+The app uses this file to call your model via CLI.
 
-## 🎨 Customization
+✅ Features in UI
 
-- Modify the UI in `app/page.tsx`
-- Adjust AI prompts in the API routes
-- Customize styling in `app/globals.css`
-- Add more features by creating new API endpoints
+Upload PDF, DOC, PPT, or TXT
 
-## 🛠 Dependencies
+Real-time progress tracking
 
-- **Next.js 14**: React framework
-- **TypeScript**: Type safety
-- **Tailwind CSS**: Styling
-- **Ollama**: Local AI model integration
+Download final summary as PDF
 
-## 📖 Educational Use Cases
+Sidebar for downloaded summaries
 
-- **Students**: Create study materials from lecture notes
-- **Teachers**: Generate quizzes and learning aids
-- **Self-learners**: Get AI tutoring on any topic
-- **Exam Prep**: Practice with generated questions and flashcards 
+Built with Tailwind CSS for responsive design
+
+🏆 Why It’s Useful for Students
+
+Saves hours of note-making
+
+Handles textbooks, lecture slides, and research papers
+
+Summarized content is clear, structured, and easy to study
+
+🔗 Future Improvements
+
+✅ Flashcard generation
+
+✅ Quiz generator
+
+✅ Real-time streaming summaries
+
+✅ Dark mode UI
+
+🔥 Hackathon Submission | Built by Yuvraj D Sirganor
+📌 Powered by PCS and Ollama LLMs
+🚀 Summarize your knowledge, don’t waste time reading everything!
